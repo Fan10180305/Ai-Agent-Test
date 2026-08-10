@@ -1,0 +1,16 @@
+[
+  {"id": "airflow-config", "name": "共享编排工厂与告警", "complexity": "high"},
+  {"id": "ods-d", "name": "ODS日批贴源层", "complexity": "high"},
+  {"id": "ods-h", "name": "ODS小时批贴源层", "complexity": "medium"},
+  {"id": "dim-d", "name": "DIM维度层日时批", "complexity": "medium"},
+  {"id": "dwd-d", "name": "DWD明细日批", "complexity": "high"},
+  {"id": "dwd-h", "name": "DWD明细小时批", "complexity": "medium"},
+  {"id": "dws-d", "name": "DWS汇总层日时批", "complexity": "medium"},
+  {"id": "rpt-d", "name": "RPT报表日批", "complexity": "high"},
+  {"id": "rpt-h", "name": "RPT报表小时批", "complexity": "low"},
+  {"id": "tag-d", "name": "标签生产日批", "complexity": "high"},
+  {"id": "analyst-serving", "name": "分析服务风控日报出口", "complexity": "high"},
+  {"id": "metadata", "name": "元数据与GCP监控", "complexity": "medium"},
+  {"id": "ops-staging", "name": "运维清理与Dataproc接入", "complexity": "medium"},
+  {"id": "test-dags", "name": "测试环境DAG包", "complexity": "low"}
+]

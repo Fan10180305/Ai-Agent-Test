@@ -1,0 +1,5 @@
+[
+  {"id": "commander", "name": "001指挥官核心", "complexity": "high"},
+  {"id": "archaeology", "name": "考古执行器逻辑", "complexity": "medium"},
+  {"id": "infrastructure", "name": "基础设施脚本集", "complexity": "low"}
+]

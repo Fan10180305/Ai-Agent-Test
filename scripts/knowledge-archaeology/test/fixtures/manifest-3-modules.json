@@ -1,0 +1,5 @@
+[
+  {"id": "signin",          "name": "签到模块",   "complexity": "high"},
+  {"id": "multiple-order",  "name": "多单任务模块", "complexity": "high"},
+  {"id": "channel-exchange", "name": "渠道兑换模块", "complexity": "medium"}
+]

@@ -1,0 +1,34 @@
+steps:
+# Step 1: 使用 Python 镜像处理文件并复制到本地 staging 目录
+# 这个步骤将准备 /workspace/staging 目录，使其包含当前提交中所有应同步的文件。
+# 当前 sync_script.py 采用「路径前缀白名单」策略（INCLUDED_PREFIXES = ('dags/',)）：
+# 仅 dags/ 下的 DAG 资产进入 staging。其他子目录（如 metric_bot/、mcp_servers/、
+# airflow-script-trunk-knowledge/、docs/）默认不同步，避免污染 Composer dags bucket。
+- name: 'python:3.10'
+  entrypoint: 'python'
+  args:
+    - 'sync_script.py'
+    - '--gcs-destination'
+    - '${_GS_URI}'
+
+# Step 2: 使用 gcloud 镜像将本地 staging 目录同步到 GCS
+# rsync -d 会删除目标中源没有的文件（保持 dags bucket 与 git 仓库 dags/ 子目录严格一致）。
+# 这一步推送的是 Composer 的 dags 资产，目标是 gs://<bucket>/，按 Composer 标准
+# 映射（dags/data/plugins/logs 四个标准子目录）落到 worker 上。
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'gsutil'
+  args:
+    - 'rsync'
+    # - '-d'  # 暂不启用：避免一次清理掉历史残留时的连锁影响；待历史副本人工清理完毕后可再打开。
+    - '-r'
+    - '/workspace/staging/'
+    - '${_GS_URI}/'
+
+
+# 指定日志存储桶
+logsBucket: 'gs://qpon-test-cloudbuild-logs'
+
+# 建议在 Cloud Build 触发器中配置 Fetch depth 为 0 (完整克隆)，
+# 尽管对于这个版本的脚本不是严格必须的，但能避免潜在的 Git 问题。
+# options:
+#   fetch_depth: 0 # 示例：设置为 0 进行完整克隆

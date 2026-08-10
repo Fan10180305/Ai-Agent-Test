@@ -1,0 +1,7 @@
+# 知识库考古流水线产出目录内的运行时文件
+*-knowledge/.logs/
+*-knowledge/.tmp/
+
+# 根目录遗留的旧 next-prompt.md（历史遗留，可手动删除）
+/next-prompt.md
+.ai-knowledge/

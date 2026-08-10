@@ -1,0 +1,4 @@
+[
+  {"id": "alpha", "name": "Alpha模块", "complexity": "high"},
+  {"id": "beta",  "name": "Beta模块",  "complexity": "medium"}
+]
