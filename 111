@@ -1,0 +1,31 @@
+from datetime import datetime, timedelta
+
+yesterday = datetime.now() - timedelta(days=1)
+yesterday_month_str = yesterday.strftime('%Y%m')
+
+start_year = 2025
+start_month = 9
+current_date = datetime(start_year, start_month, 1)
+value_list = []
+
+for i in range(50):
+    next_month_str = current_date.strftime('%Y%m')
+    print(next_month_str)
+    value_list.append(next_month_str)
+
+    # 计算下个月
+    if current_date.month == 12:
+        next_year = current_date.year + 1
+        next_month = 1
+    else:
+        next_year = current_date.year
+        next_month = current_date.month + 1
+
+    # 检查是否已经超过昨天所在的月份
+    next_month_str_new = datetime(next_year, next_month, 1).strftime('%Y%m')
+    if next_month_str_new > yesterday_month_str:
+        break
+
+    current_date = datetime(next_year, next_month, 1)
+
+print("\n最终列表:", value_list)
